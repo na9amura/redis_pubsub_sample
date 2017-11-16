@@ -1,0 +1,17 @@
+version: '2'
+services:
+  app:
+    build: .
+    command: bundle exec rails s -p 3333 -b 0.0.0.0
+    environment:
+      RAILS_ENV: development
+    ports:
+      - 3333:3333
+    volumes:
+      - .:/usr/src/app
+    links:
+      - redis
+  redis:
+    image: redis:3.2
+    ports:
+      - 6379:6379
